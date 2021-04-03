@@ -1,7 +1,7 @@
 Original App Design Project
 ===
 
-# Anime Alert //TODO: Come up with better name
+# AnimeHub 
 
 ## Table of Contents
 1. [Overview](#Overview)
