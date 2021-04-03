@@ -65,7 +65,7 @@ The goal for this app is to create a place where users can easily browse through
 * Profile Page
     * User can see all the discussions they have contributed to
     * User can tap on a discussion in the list to view its **Discussion detail Page**
-    * *Optional*: User can sort thier personalized anime list by rating, trending, etc.
+    * *Optional*: User can sort their personalized anime list by rating, trending, etc.
     * *Optional*: User can add a profile picture
     * *Optional:* User can see their own personalized anime list
     * *Optional:* User can tap on the anime in the list to go to its **Anime Detail Screen**
