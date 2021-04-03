@@ -41,6 +41,7 @@ The goal for this app is to create a place where users can easily browse through
 * Users can make comments on anime
 * User can watch a trailer of the anime
 * Users can have profile pictures
+* User can see anime that they are interested in
 * ...
 
 ### 2. Screen Archetypes
@@ -62,13 +63,12 @@ The goal for this app is to create a place where users can easily browse through
     * User can see comments made on this post
     * User can respond to the post and make their own comment
 * Profile Page
-    * Top of profile page has a navigation bar to view a list of anime and a list of discussions
-    * User can see their own personalized anime list 
     * User can see all the discussions they have contributed to
     * User can tap on a discussion in the list to view its **Discussion detail Page**
-    * User can tap on the anime in the list to go to its **Anime Detail Screen**
     * *Optional*: User can sort thier personalized anime list by rating, trending, etc.
     * *Optional*: User can add a profile picture
+    * *Optional:* User can see their own personalized anime list
+    * *Optional:* User can tap on the anime in the list to go to its **Anime Detail Screen**
     
 
 ### 3. Navigation
@@ -91,7 +91,7 @@ The goal for this app is to create a place where users can easily browse through
 
 ## Wireframes
 [Add picture of your hand sketched wireframes in this section]
-<img src="YOUR_WIREFRAME_IMAGE_URL" width=600>
+<img src="wireframe.png" width=600>
 
 ### [BONUS] Digital Wireframes & Mockups
 
