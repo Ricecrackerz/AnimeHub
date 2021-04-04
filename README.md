@@ -98,10 +98,55 @@ The goal for this app is to create a place where users can easily browse through
 ### [BONUS] Interactive Prototype
 
 ## Schema 
-[This section will be completed in Unit 9]
+
 ### Models
-[Add table of models]
+
+#### Discussion Post
+| Property    | Type | Description |
+| ----------- | ----------- | ---------- |
+| objectId    | String      | unique id for the user post (default field) |
+| username    | Pointer to User  | name of the author|
+| animeTitle  | String      | title of the anime being discussed |
+| postTitle   | String      | title of the post|
+| createdAt   | DateTime    | date when post is created (default field)|
+| updatedAt   | DateTime    | date when post is last updated (default field)| 
+
+#### Anime
+|Property    | Type | Description |
+| ----------- | ----------- | ---------- |
+| objectId   | int       | unique numericl id from JSON |
+| animeTitle | String    | title of the anime being discussed |
+| animeRating| double    | rating of the viewed anime |
+| animeOverview | String | summary of the anime being viewed |
+| animePosterPath | String | visual image for the anime |
+
 ### Networking
 - [Add list of network requests by screen ]
 - [Create basic snippets for each Parse network request]
 - [OPTIONAL: List endpoints if using existing API such as Yelp]
+
+* Signup Page
+    * (Create/POST) Can make a new Username and Password - to Parse
+* Login Page
+    * (Read/GET) Authenticate the username and password - from Parse
+* Home Page (Anime List Page)
+    *  (Read/GET) Query all anime to show in the list - from Kitsu
+    *  (Read/GET) Query ratings for each anime - from Kitsu
+    *  *Optional:(If long press for favorite is implemented)* (Create/POST) A link to the anime favorited - to Parse
+* Anime Detail Screen
+    * (Read/GET) Query the details of the anime (description/rating) - from Kitsu
+    * *Optional: (Read/GET) Query the YouTube trailer URL to show the trailer* - from Kitsu
+    * ***Optional: (Create/POST) Add the interested anime to a user's anime list???*** - to Parse
+* Discussion Page
+    * (Read/GET) Query the list of discussions - from Parse
+    * (Read/GET) Query some user information for each discussion - from Parse
+    * (Create/POST) Create a new discussion - to Parse
+* Discussion Detail Page
+    * (Read/GET) Query the details of the discussion post - from Parse
+    * (Read/GET) Show comments on the discussion post - from Parse
+    * (Create/POST) Add a comment to the discussion post - to Parse
+* Profile Page
+    * *Optional:(Read/GET) Query the user's watchlist of anime - from Parse*
+    * *Optional:(Read/GET) Use the user's watchlist from Parse to show the anime - from Kitsu*
+    * *Optional:(Read/GET) Query the user's discussion posts - from Parse*
+
