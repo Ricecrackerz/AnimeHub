@@ -16,14 +16,15 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        bottomNavigationView = findViewById(R.id.bottomNavigation);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        bottomNavigationView = findViewById(R.id.bottomNavigation);
 
 
 
-//TODO: PLEASE HELP ME FIX THIS
-    /*  bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener(){
+
+    bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener(){
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 Fragment fragment;
@@ -41,6 +42,6 @@ public class MainActivity extends AppCompatActivity {
                 }
                 return true;
             }
-        });*/
+        });
     }
 }
