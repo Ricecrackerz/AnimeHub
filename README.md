@@ -22,27 +22,33 @@ The goal for this app is to create a place where users can easily browse through
 - **Habit:** Consistent updates on new animes
 - **Scope:** A viable project that is presentable on demo day.
 
+## First Sprint Progress Gif
+
+<img src="https://github.com/Ricecrackerz/AnimeHub/blob/master/AnimeHubGIF1.gif" width=500>
+
 ## Product Spec
 
 ### 1. User Stories (Required and Optional)
 
 **Required Must-have Stories**
 
-* User can see a list of anime
-* User can make posts about anime
-* User can make comments on posts
-* User can select anime to add to their watchlist
-* User can see thier own profile which contains thier personalized list of animes and contributions to posts
-* ...
+- [x] User can login/sign up/sign out of the app
+- [x] User can navigate through the app using bottom tab navigation
+- [ ] User can see a list of anime
+- [ ] User can make posts about anime
+- [ ] User can make comments on posts
+- [ ] User can select anime to add to their watchlist
+- [ ] User can see their own profile which contains thier personalized list of animes and contributions to posts
+- [ ] ...
 
 **Optional Nice-to-have Stories**
 
-* User can sort anime by category(trending, highly rated, etc.)
-* Users can make comments on anime
-* User can watch a trailer of the anime
-* Users can have profile pictures
-* User can see anime that they are interested in
-* ...
+- [ ] User can sort anime by category(trending, highly rated, etc.)
+- [ ] Users can make comments on anime
+- [ ] User can watch a trailer of the anime
+- [ ] Users can have profile pictures
+- [ ] User can see anime that they are interested in
+- [ ] ...
 
 ### 2. Screen Archetypes
 
@@ -96,6 +102,7 @@ The goal for this app is to create a place where users can easily browse through
 ### [BONUS] Digital Wireframes & Mockups
 
 ### [BONUS] Interactive Prototype
+<img src="https://github.com/Ricecrackerz/AnimeHub/blob/master/AnimeHub_Figma.gif" width=500>
 
 ## Schema 
 
