@@ -2,60 +2,40 @@ package com.example.animehub.fragments;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.codepath.asynchttpclient.AsyncHttpClient;
+import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
 import com.example.animehub.R;
+import com.example.animehub.models.Anime;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link Home#newInstance} factory method to
- * create an instance of this fragment.
- */
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.List;
+
+import javax.annotation.Nullable;
+
+import okhttp3.Headers;
+
+
 public class Home extends Fragment {
+    public static final String ANIME_POPULARITYSORTED_URL = "https://kitsu.io/api/edge/anime?sort=popularityRank";
+    public static final String TAG = "HomeFragment";
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    List<Anime> animes;
 
     public Home() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment Home.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static Home newInstance(String param1, String param2) {
-        Home fragment = new Home();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -63,4 +43,38 @@ public class Home extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_home, container, false);
     }
+
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState){
+        super.onViewCreated(view,savedInstanceState);
+        AsyncHttpClient client = new AsyncHttpClient();
+        client.get(ANIME_POPULARITYSORTED_URL, new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int i, Headers headers, JSON json) {
+                Log.d(TAG,"onSuccess");
+                JSONObject jsonObject = json.jsonObject;
+                try{
+                    JSONArray data = jsonObject.getJSONArray("data");
+                    Log.i(TAG,"data: " + data.toString());
+                    animes = Anime.fromJsonArray(data);
+                    Log.i(TAG,"Animes: " + animes.size());
+
+                    //this for loop is to check if it works
+                    for(int j = 0; j < animes.size();j++){
+                        Log.i(TAG,"Title: " + animes.get(j).getCanonicalTitle() + "\n");
+                        Log.i(TAG,"ID: " + animes.get(j).getAnimeID() + "\n");
+                    }//for
+                } catch (JSONException e){
+                    Log.e(TAG,"Hit json exception");
+                }//catch
+            }
+
+            @Override
+            public void onFailure(int i, Headers headers, String s, Throwable throwable) {
+
+            }
+        });
+
+    }//onViewCreated
+
+
 }
