@@ -4,6 +4,8 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,10 +21,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Nullable;
 
+import adapters.AnimeAdapter;
 import okhttp3.Headers;
 
 
@@ -46,6 +50,16 @@ public class Home extends Fragment {
 
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState){
         super.onViewCreated(view,savedInstanceState);
+        RecyclerView rvAnimes= view.findViewById(R.id.rvAnimes);
+        animes= new ArrayList<>();
+
+        //create the adapter
+        AnimeAdapter animeAdapter = new AnimeAdapter(getContext(), animes);
+        // set the adapter on the recyclerview
+        rvAnimes.setAdapter(animeAdapter);
+        //Set a layout manager
+        rvAnimes.setLayoutManager(new LinearLayoutManager(getContext()));
+
         AsyncHttpClient client = new AsyncHttpClient();
         client.get(ANIME_POPULARITYSORTED_URL, new JsonHttpResponseHandler() {
             @Override
@@ -55,7 +69,8 @@ public class Home extends Fragment {
                 try{
                     JSONArray data = jsonObject.getJSONArray("data");
                     Log.i(TAG,"data: " + data.toString());
-                    animes = Anime.fromJsonArray(data);
+                    animes.addAll(Anime.fromJsonArray(data));
+                    animeAdapter.notifyDataSetChanged();
                     Log.i(TAG,"Animes: " + animes.size());
 
                     //this for loop is to check if it works

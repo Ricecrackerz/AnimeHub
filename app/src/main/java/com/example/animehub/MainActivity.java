@@ -12,7 +12,10 @@ import android.widget.Toast;
 import com.example.animehub.fragments.Discussion;
 import com.example.animehub.fragments.Home;
 import com.example.animehub.fragments.Profile;
+import com.example.animehub.models.Anime;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
