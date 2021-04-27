@@ -12,7 +12,10 @@ import android.widget.Toast;
 import com.example.animehub.fragments.Discussion;
 import com.example.animehub.fragments.Home;
 import com.example.animehub.fragments.Profile;
+import com.example.animehub.models.Anime;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -40,18 +43,15 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.action_home:
                         fragment = new Home();
                         Toast.makeText(MainActivity.this, "Home!", Toast.LENGTH_SHORT).show();
-                        fragment = new Home();
                         break;
                     case R.id.action_discussion:
                         fragment = new Discussion();
                         Toast.makeText(MainActivity.this, "Discussion!", Toast.LENGTH_SHORT).show();
-                        fragment = new Discussion();
                         break;
                     case R.id.action_profile:
                     default:
                         fragment = new Profile();
                         Toast.makeText(MainActivity.this, "Profile!", Toast.LENGTH_SHORT).show();
-                        fragment = new Profile();
                         break;
                 }
                 fragmentManager.beginTransaction().replace(R.id.flContainer, fragment).commit();
