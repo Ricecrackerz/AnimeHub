@@ -22,7 +22,7 @@ public class Post extends ParseObject{
 
     public ParseUser getUser() { return getParseUser(KEY_USER); }
 
-    public void setUser(ParseUser user) { put(KEY_USER, user); }
+    public void setUser(ParseUser username) { put(KEY_USER, username); }
 
     public String getTitle(){ return getString(KEY_TITLE); }
 

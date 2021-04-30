@@ -6,18 +6,33 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.PopupWindow;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.animehub.MainActivity;
+import com.example.animehub.PostsAdapter;
 import com.example.animehub.R;
+import com.example.animehub.models.Post;
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseQuery;
+import com.parse.ParseUser;
+import com.parse.SaveCallback;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Discussion extends Fragment {
 
@@ -25,6 +40,9 @@ public class Discussion extends Fragment {
     public static final String TAG = "Discussion";
     private RecyclerView rvPosts;
     private Button btnDiscussion;
+    private EditText etDescription, etTitle;
+    private PostsAdapter adapter;
+    private List<Post> allPosts;
 
     public Discussion() {
         // Required empty public constructor
@@ -50,10 +68,42 @@ public class Discussion extends Fragment {
         rvPosts = view.findViewById(R.id.rvPosts);
         btnDiscussion = view.findViewById(R.id.btnDiscussion);
 
+        allPosts = new ArrayList<>();
+        adapter = new PostsAdapter(getContext(), allPosts);
+
         btnDiscussion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showPopup(v);
+            }
+        });
+        
+        // Set the adapter on the recycler view
+        rvPosts.setAdapter(adapter);
+
+        // Set the Layout Manager
+        //rvPosts.setLayoutManager(new FrameLayoutManager(getContext()));
+        rvPosts.setLayoutManager(new LinearLayoutManager(getContext()));
+
+
+        queryPost();
+    }
+
+    private void queryPost() {
+        ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
+        query.include(Post.KEY_USER);
+        query.findInBackground(new FindCallback<Post>() {
+            @Override
+            public void done(List<Post> posts, ParseException e) {
+                if(e != null){
+                    Log.e(TAG, "Issue with getting posts", e);
+                    return;
+                }
+                for(Post post: posts){
+                    Log.i(TAG, "Post:" + post.getDescription() + ", username:" + post.getUser().getUsername());
+                }
+                allPosts.addAll(posts);
+                adapter.notifyDataSetChanged();
             }
         });
     }
@@ -64,8 +114,8 @@ public class Discussion extends Fragment {
                 ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);
 
         popupWindow.setFocusable(true);
-        TextView tvTitle = (TextView) popupView.findViewById(R.id.etTitle);
-        TextView tvDescription = (TextView) popupView.findViewById(R.id.etDescription);
+        etTitle = (EditText) popupView.findViewById(R.id.etTitle);
+        etDescription = (EditText) popupView.findViewById(R.id.etDescription);
         Button btnSubmit =  popupView.findViewById(R.id.btnSubmit);
 
 
@@ -79,5 +129,43 @@ public class Discussion extends Fragment {
 
         popupWindow.showAtLocation(anchorView, Gravity.CENTER, 0, 0);
 
+
+        btnSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String description = etDescription.getText().toString();
+                String title = etTitle.getText().toString();
+                if(description.isEmpty()){
+                    Toast.makeText(getContext(), "Description cannot be empty", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if(title.isEmpty()){
+                    Toast.makeText(getContext(), "Description cannot be empty", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                ParseUser currentUser = ParseUser.getCurrentUser();
+                savePost(description, currentUser, title);
+            }
+        });
+
+    }
+
+    private void savePost(String description, ParseUser currentUser, String title) {
+        Post post = new Post();
+        post.setDescription(description);
+        post.setTitle(title);
+        post.setUser(currentUser);
+        post.saveInBackground(new SaveCallback() {
+            @Override
+            public void done(ParseException e) {
+                if(e != null){
+                    Log.e(TAG, "Error while saving", e);
+                    Toast.makeText(getContext(), "Error while saving!", Toast.LENGTH_SHORT).show();
+                }
+                Log.i(TAG, "Post save was successful");
+                etDescription.setText("");
+                etTitle.setText("");
+            }
+        });
     }
 }
