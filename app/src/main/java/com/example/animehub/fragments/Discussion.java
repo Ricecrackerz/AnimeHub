@@ -50,7 +50,7 @@ public class Discussion extends Fragment {
         rvPosts = view.findViewById(R.id.rvPosts);
         btnDiscussion = view.findViewById(R.id.btnDiscussion);
 
-       btnDiscussion.setOnClickListener(new View.OnClickListener() {
+        btnDiscussion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showPopup(v);
@@ -78,8 +78,6 @@ public class Discussion extends Fragment {
         anchorView.getLocationOnScreen(location);
 
         popupWindow.showAtLocation(anchorView, Gravity.CENTER, 0, 0);
-
-
 
     }
 }
