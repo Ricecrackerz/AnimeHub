@@ -1,13 +1,22 @@
 package com.example.animehub;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.method.LinkMovementMethod;
+import android.text.style.ClickableSpan;
+import android.text.style.ForegroundColorSpan;
+import android.text.style.UnderlineSpan;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.parse.LogInCallback;
@@ -35,18 +44,27 @@ public class LoginActivity extends AppCompatActivity {
         etUsername = findViewById(R.id.etUsername);
         etPassword = findViewById(R.id.etPassword);
         btnLogin = findViewById(R.id.btnLogin);
+        TextView tvSignUp = findViewById(R.id.tvSignUp);
+        String loginText = "Don't have an account? Sign Up.";
 
-        btnSignUp = findViewById(R.id.btnSignUp);
+        SpannableString mSpannableString = new SpannableString(loginText);
+        ForegroundColorSpan mBlue = new ForegroundColorSpan(Color.BLUE);
+        mSpannableString.setSpan(mBlue, 23, 31, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        mSpannableString.setSpan(new UnderlineSpan(), 23, 31, 0);
 
-        btnSignUp.setOnClickListener(new View.OnClickListener() {
+        ClickableSpan clickableSpan = new ClickableSpan() {
             @Override
-            public void onClick(View v) {
+            public void onClick(@NonNull View widget) {
                 Toast.makeText(LoginActivity.this, "Sign Up!", Toast.LENGTH_SHORT).show();
                 goSignUp();
 
             }
-        });
+        };
 
+        mSpannableString.setSpan(clickableSpan, 23, 31, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        tvSignUp.setText(mSpannableString);
+        tvSignUp.setMovementMethod(LinkMovementMethod.getInstance());
+        
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

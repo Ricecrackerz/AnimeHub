@@ -1,12 +1,21 @@
 package com.example.animehub;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.method.LinkMovementMethod;
+import android.text.style.ClickableSpan;
+import android.text.style.ForegroundColorSpan;
+import android.text.style.UnderlineSpan;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.parse.ParseException;
@@ -29,7 +38,28 @@ public class SignUpActivity extends AppCompatActivity {
         etUsername = findViewById(R.id.etUsername);
         etPassword = findViewById(R.id.etPassword);
         btnCreate = findViewById(R.id.btnCreate);
-        btnButton = findViewById(R.id.btnBack);
+
+        TextView tvgoBack = findViewById(R.id.tvGoBack);
+        String loginText = "Already have an account? Sign In.";
+
+        SpannableString mSpannableString = new SpannableString(loginText);
+        ForegroundColorSpan mBlue = new ForegroundColorSpan(Color.BLUE);
+        mSpannableString.setSpan(mBlue, 25, 32, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        mSpannableString.setSpan(new UnderlineSpan(), 25, 32, 0);
+
+        ClickableSpan clickableSpan = new ClickableSpan() {
+            @Override
+            public void onClick(@NonNull View widget) {
+                Toast.makeText(SignUpActivity.this, "Back to Main Menu!", Toast.LENGTH_SHORT).show();
+                goLoginActivity();
+
+            }
+        };
+
+        mSpannableString.setSpan(clickableSpan, 25, 32, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        tvgoBack.setText(mSpannableString);
+        tvgoBack.setMovementMethod(LinkMovementMethod.getInstance());
 
         btnCreate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,13 +78,14 @@ public class SignUpActivity extends AppCompatActivity {
             }
         });
 
-        btnButton.setOnClickListener(new View.OnClickListener() {
+
+        /*tvgoBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(SignUpActivity.this, "Back to Main Menu!", Toast.LENGTH_SHORT).show();
                 goLoginActivity();
             }
-        });
+        });*/
 
 
     }

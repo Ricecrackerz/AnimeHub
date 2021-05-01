@@ -11,7 +11,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.animehub.models.Post;
+import com.parse.ParseUser;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> {
@@ -62,6 +64,16 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
             tvUsername.setText(post.getUser().getUsername());
             ivProfileImage.setImageResource(R.drawable.defaultpic);
 
+        }
+
+        public void clear() {
+            posts.clear();
+            notifyDataSetChanged();
+        }
+
+        public void addAll(List<Post> posts){
+            posts.addAll(posts);
+            notifyDataSetChanged();
         }
     }
 }

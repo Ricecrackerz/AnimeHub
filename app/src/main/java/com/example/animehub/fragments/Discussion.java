@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.util.Log;
 import android.view.Gravity;
@@ -46,6 +47,7 @@ public class Discussion extends Fragment {
     private EditText etDescription, etTitle;
     private PostsAdapter adapter;
     private List<Post> allPosts;
+    private SwipeRefreshLayout swipeContainer;
 
     public Discussion() {
         // Required empty public constructor
@@ -70,6 +72,19 @@ public class Discussion extends Fragment {
 
         rvPosts = view.findViewById(R.id.rvPosts);
         btnDiscussion = view.findViewById(R.id.btnDiscussion);
+        swipeContainer = view.findViewById(R.id.swipeContainer);
+
+        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                Log.i(TAG, "fetching new data!");
+                queryPost();
+            }
+        });
 
         allPosts = new ArrayList<>();
         adapter = new PostsAdapter(getContext(), allPosts);
@@ -92,9 +107,11 @@ public class Discussion extends Fragment {
         queryPost();
     }
 
+
     private void queryPost() {
         ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
         query.include(Post.KEY_USER);
+        query.addDescendingOrder(Post.KEY_CREATED_KEY);
         query.findInBackground(new FindCallback<Post>() {
             @Override
             public void done(List<Post> posts, ParseException e) {
@@ -105,8 +122,10 @@ public class Discussion extends Fragment {
                 for(Post post: posts){
                     Log.i(TAG, "Post:" + post.getDescription() + ", username:" + post.getUser().getUsername());
                 }
+                allPosts.clear();
                 allPosts.addAll(posts);
                 adapter.notifyDataSetChanged();
+                swipeContainer.setRefreshing(false);
             }
         });
     }
@@ -134,35 +153,6 @@ public class Discussion extends Fragment {
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
 
-        /*View popupView = getLayoutInflater().inflate(R.layout.activity_post, null);
-        PopupWindow popupWindow = new PopupWindow(popupView,
-        ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);
-        popupWindow.setFocusable(true);
-        etTitle = (EditText) view.findViewById(R.id.etTitle);
-        etDescription = (EditText) popupView.findViewById(R.id.etDescription);
-        Button btnSubmit =  popupView.findViewById(R.id.btnSubmit);
-
-
-        If you need the PopupWindow to dismiss when when touched outside
-        popupWindow.setBackgroundDrawable(new ColorDrawable());
-
-        int location[] = new int[2];
-
-        Get the View's(the one that was clicked in the Fragment) location
-        anchorView.getLocationOnScreen(location);
-
-        popupWindow.showAtLocation(anchorView, Gravity.CENTER, 0, 0);
-
-        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-                afterTextChanged(number);
-            }
-        });
-
-        AlertDialog alertDialog = AlertDialog.create();
-        alertDialog.show();*/
-
-
 
            btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -179,6 +169,7 @@ public class Discussion extends Fragment {
                 }
                 ParseUser currentUser = ParseUser.getCurrentUser();
                 savePost(description, currentUser, title);
+                alertDialog.dismiss();
             }
         });
 
@@ -197,8 +188,8 @@ public class Discussion extends Fragment {
                     Toast.makeText(getContext(), "Error while saving!", Toast.LENGTH_SHORT).show();
                 }
                 Log.i(TAG, "Post save was successful");
-                etDescription.setText("");
-                etTitle.setText("");
+                //etDescription.setText(" ");
+                //etTitle.setText(" ");
             }
         });
     }

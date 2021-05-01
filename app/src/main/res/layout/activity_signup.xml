@@ -29,11 +29,15 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="Create Account" />
-    <Button
-        android:id="@+id/btnBack"
+
+    <TextView
+        android:id="@+id/tvGoBack"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="450dp"
         android:layout_weight="1"
-        android:text="Back" />
+        android:clickable="true"
+        android:text="Already have an account? Sign in."
+        android:textSize="16sp" />
 
 </LinearLayout>
