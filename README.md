@@ -22,6 +22,9 @@ The goal for this app is to create a place where users can easily browse through
 - **Habit:** Consistent updates on new animes
 - **Scope:** A viable project that is presentable on demo day.
 
+## Third Spring Progress Gif
+<img src = "https://github.com/Ricecrackerz/AnimeHub/blob/master/AnimeHubGIF3.gif" width = 500>
+
 ## Second Sprint Progress Gif
 <img src = "https://github.com/Ricecrackerz/AnimeHub/blob/master/AnimeHubGIF2.gif" width = 500>
 
@@ -38,7 +41,7 @@ The goal for this app is to create a place where users can easily browse through
 - [x] User can login/sign up/sign out of the app
 - [x] User can navigate through the app using bottom tab navigation
 - [x] User can see a list of anime
-- [ ] User can make posts about anime
+- [x] User can make posts about anime
 - [ ] User can make comments on posts
 - [ ] User can select anime to add to their watchlist
 - [ ] User can see their own profile which contains thier personalized list of animes and contributions to posts
