@@ -60,7 +60,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
             tvDescription.setText(post.getDescription());
             tvTitle.setText(post.getTitle());
             tvUsername.setText(post.getUser().getUsername());
-            //ivProfileImage.setImageResource();
+            ivProfileImage.setImageResource(R.drawable.defaultpic);
 
         }
     }

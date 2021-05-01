@@ -1,5 +1,7 @@
 package com.example.animehub.fragments;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
@@ -17,6 +19,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -74,7 +77,7 @@ public class Discussion extends Fragment {
         btnDiscussion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showPopup(v);
+                goDialogBox();
             }
         });
         
@@ -108,29 +111,60 @@ public class Discussion extends Fragment {
         });
     }
 
-    public void showPopup(View anchorView) {
-        View popupView = getLayoutInflater().inflate(R.layout.activity_post, null);
-        PopupWindow popupWindow = new PopupWindow(popupView,
-                ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);
+    public void goDialogBox() {
 
+        LinearLayout layout = new LinearLayout(getActivity());
+        layout.setOrientation(LinearLayout.VERTICAL);
+
+        AlertDialog.Builder builder= new AlertDialog.Builder(getActivity());
+
+        final EditText etTitle = new EditText(getActivity());
+        layout.addView(etTitle);
+        etTitle.setHint("Title");
+
+        final EditText etDescription = new EditText(getActivity());
+        layout.addView(etDescription);
+        etDescription.setHint("Description");
+
+        final Button btnSubmit = new Button(getActivity());
+        layout.addView(btnSubmit);
+        btnSubmit.setText("SUBMIT");
+
+        builder.setView(layout);
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+
+        /*View popupView = getLayoutInflater().inflate(R.layout.activity_post, null);
+        PopupWindow popupWindow = new PopupWindow(popupView,
+        ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);
         popupWindow.setFocusable(true);
-        etTitle = (EditText) popupView.findViewById(R.id.etTitle);
+        etTitle = (EditText) view.findViewById(R.id.etTitle);
         etDescription = (EditText) popupView.findViewById(R.id.etDescription);
         Button btnSubmit =  popupView.findViewById(R.id.btnSubmit);
 
 
-        // If you need the PopupWindow to dismiss when when touched outside
+        If you need the PopupWindow to dismiss when when touched outside
         popupWindow.setBackgroundDrawable(new ColorDrawable());
 
         int location[] = new int[2];
 
-        // Get the View's(the one that was clicked in the Fragment) location
+        Get the View's(the one that was clicked in the Fragment) location
         anchorView.getLocationOnScreen(location);
 
         popupWindow.showAtLocation(anchorView, Gravity.CENTER, 0, 0);
 
+        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                afterTextChanged(number);
+            }
+        });
 
-        btnSubmit.setOnClickListener(new View.OnClickListener() {
+        AlertDialog alertDialog = AlertDialog.create();
+        alertDialog.show();*/
+
+
+
+           btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String description = etDescription.getText().toString();
