@@ -13,7 +13,7 @@ public class Anime {
     String canonicalTitle;
     String enTitle;
     String synopsis;
-    int averageRating;
+    double averageRating;
     String originalPosterPath;
     String youTubeVideoId;
 
@@ -22,7 +22,7 @@ public class Anime {
 
     public Anime(JSONObject jsonObject) throws JSONException{
         animeID =  jsonObject.getInt("id");
-        averageRating = jsonObject.getJSONObject("attributes").getInt("averageRating");
+        averageRating = jsonObject.getJSONObject("attributes").getDouble("averageRating");
         canonicalTitle = jsonObject.getJSONObject("attributes").getString("canonicalTitle");
         synopsis = jsonObject.getJSONObject("attributes").getString("synopsis");
         originalPosterPath = jsonObject.getJSONObject("attributes").getJSONObject("posterImage").getString("original");
@@ -48,7 +48,7 @@ public class Anime {
     public String getSynopsis(){
         return  synopsis;
     }
-    public int getAverageRating(){
+    public double getAverageRating(){
         return averageRating;
     }
     public String getOriginalPosterPath(){

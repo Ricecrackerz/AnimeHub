@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -61,18 +62,21 @@ public class AnimeAdapter extends RecyclerView.Adapter<AnimeAdapter.ViewHolder> 
         TextView animeTitle;
         TextView animeOverview;
         ImageView animePoster;
+        RatingBar animeRating;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             animeTitle= itemView.findViewById(R.id.animeTitle);
             animeOverview= itemView.findViewById(R.id.animeOverview);
             animePoster= itemView.findViewById(R.id.animePoster);
+            animeRating = itemView.findViewById(R.id.animeRating);
         }
 
         public void bind(Anime anime) {
             animeTitle.setText(anime.getCanonicalTitle());
             animeOverview.setText(anime.getSynopsis());
             Glide.with(context).load(anime.getOriginalPosterPath()).into(animePoster);
+            animeRating.setRating((float) anime.getAverageRating()/10);
         }
     }
     }

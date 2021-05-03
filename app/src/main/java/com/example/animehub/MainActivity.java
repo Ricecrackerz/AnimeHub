@@ -42,16 +42,13 @@ public class MainActivity extends AppCompatActivity {
                 switch (menuItem.getItemId()) {
                     case R.id.action_home:
                         fragment = new Home();
-                        Toast.makeText(MainActivity.this, "Home!", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.action_discussion:
                         fragment = new Discussion();
-                        Toast.makeText(MainActivity.this, "Discussion!", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.action_profile:
                     default:
                         fragment = new Profile();
-                        Toast.makeText(MainActivity.this, "Profile!", Toast.LENGTH_SHORT).show();
                         break;
                 }
                 fragmentManager.beginTransaction().replace(R.id.flContainer, fragment).commit();
