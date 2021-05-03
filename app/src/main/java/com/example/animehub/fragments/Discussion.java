@@ -1,13 +1,16 @@
 package com.example.animehub.fragments;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -22,9 +25,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.animehub.DiscussionDetailPage;
 import com.example.animehub.MainActivity;
 import com.example.animehub.PostsAdapter;
 import com.example.animehub.R;
@@ -78,6 +83,7 @@ public class Discussion extends Fragment {
                 android.R.color.holo_green_light,
                 android.R.color.holo_orange_light,
                 android.R.color.holo_red_light);
+
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -103,10 +109,10 @@ public class Discussion extends Fragment {
         //rvPosts.setLayoutManager(new FrameLayoutManager(getContext()));
         rvPosts.setLayoutManager(new LinearLayoutManager(getContext()));
 
-
         queryPost();
-    }
 
+
+    }
 
     private void queryPost() {
         ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
@@ -188,8 +194,6 @@ public class Discussion extends Fragment {
                     Toast.makeText(getContext(), "Error while saving!", Toast.LENGTH_SHORT).show();
                 }
                 Log.i(TAG, "Post save was successful");
-                //etDescription.setText(" ");
-                //etTitle.setText(" ");
             }
         });
     }

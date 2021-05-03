@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
@@ -22,11 +23,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
         android:layout_marginStart="5dp"
-        android:layout_marginTop="6dp"
+        android:layout_marginTop="22dp"
+        android:layout_marginEnd="0dp"
         android:layout_toEndOf="@+id/ivProfileImage"
         android:text="Title"
-        android:textSize="18sp" />
+        android:textSize="24sp" />
 
     <TextView
         android:id="@+id/tvUsername"
@@ -36,23 +40,10 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="5dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="3dp"
         android:layout_marginEnd="335dp"
         android:layout_toEndOf="@+id/ivProfileImage"
-        android:text="Username" />
-
-    <TextView
-        android:id="@+id/tvDescription"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignEnd="@id/tvUsername"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="31dp"
-        android:layout_marginEnd="0dp"
-        android:layout_toEndOf="@+id/ivProfileImage"
-        android:text="Description"
-        android:textSize="16sp" />
+        android:text="Username"
+        android:textAlignment="center" />
 
 </RelativeLayout>
