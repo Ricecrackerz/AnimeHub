@@ -2,8 +2,6 @@ package com.example.animehub;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,9 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.animehub.models.Post;
-import com.parse.ParseUser;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> {
@@ -71,7 +67,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
             //tvDescription.setText(post.getDescription());
             tvTitle.setText(post.getTitle());
             tvUsername.setText(post.getUser().getUsername());
-            ivProfileImage.setImageResource(R.drawable.defaultpic);
+            ivProfileImage.setImageResource(R.drawable.defaultpicsquare);
 
             container.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -81,7 +77,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
                     i.putExtra("title", post.getTitle());
                     i.putExtra("description", post.getDescription());
                     i.putExtra("username", post.getUser().getUsername());
-                    i.putExtra("profilePic", R.drawable.defaultpic);
+                    i.putExtra("profilePic", R.drawable.defaultpicsquare);
                     context.startActivity(i);
                     //((Activity) getActivity()).overridePendingTransition(0, 0);
                     //context.finish();
