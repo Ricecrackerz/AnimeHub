@@ -71,7 +71,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
             //tvDescription.setText(post.getDescription());
             tvTitle.setText(post.getTitle());
             tvUsername.setText(post.getUser().getUsername());
-            ivProfileImage.setImageResource(R.drawable.defaultpic);
+            ivProfileImage.setImageResource(R.drawable.defaultpiccircle);
 
             container.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -81,7 +81,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
                     i.putExtra("title", post.getTitle());
                     i.putExtra("description", post.getDescription());
                     i.putExtra("username", post.getUser().getUsername());
-                    i.putExtra("profilePic", R.drawable.defaultpic);
+                    i.putExtra("profilePic", R.drawable.defaultpiccircle);
                     context.startActivity(i);
                     //((Activity) getActivity()).overridePendingTransition(0, 0);
                     //context.finish();

@@ -2,14 +2,36 @@ package com.example.animehub;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.example.animehub.fragments.Discussion;
+import com.example.animehub.models.Comment;
+import com.example.animehub.models.Post;
+import com.parse.GetCallback;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
+import com.parse.ParseUser;
+import com.parse.SaveCallback;
+
+import java.util.List;
 
 public class DiscussionDetailPage extends AppCompatActivity {
 
+    public static final String TAG = "DiscussionDetailPage";
     private TextView tvDescription, tvTitle, tvUsername;
     private ImageView ivProfileImage;
+    private Button btnComment;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,6 +42,8 @@ public class DiscussionDetailPage extends AppCompatActivity {
         tvTitle = findViewById(R.id.tvTitle);
         ivProfileImage = findViewById(R.id.ivProfileImage);
         tvUsername = findViewById(R.id.tvUsername);
+
+        btnComment = findViewById(R.id.btnComment);
 
         String title = getIntent().getStringExtra("title");
         String description = getIntent().getStringExtra("description");
@@ -33,6 +57,86 @@ public class DiscussionDetailPage extends AppCompatActivity {
         tvDescription.setText(description);
         tvUsername.setText(username);
 
+        btnComment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goDialogBox();
+            }
+        });
 
+
+
+    }
+
+    private void goDialogBox() {
+        LinearLayout layout = new LinearLayout(this);
+        layout.setOrientation(LinearLayout.VERTICAL);
+
+        AlertDialog.Builder builder= new AlertDialog.Builder(this);
+
+        final EditText etCommentTitle = new EditText(this);
+        layout.addView(etCommentTitle);
+        etCommentTitle.setHint("Title");
+
+        final EditText eCommentDescription = new EditText(this);
+        layout.addView(eCommentDescription);
+        eCommentDescription.setHint("Description");
+
+        final Button btnSubmit = new Button(this);
+        layout.addView(btnSubmit);
+        btnSubmit.setText("SUBMIT");
+
+        builder.setView(layout);
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+
+
+        btnSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String description = eCommentDescription.getText().toString();
+                String title = etCommentTitle.getText().toString();
+                if(description.isEmpty()){
+                    Toast.makeText(DiscussionDetailPage.this, "Description cannot be empty", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if(title.isEmpty()){
+                    Toast.makeText(DiscussionDetailPage.this, "Title cannot be empty", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                ParseUser currentUser = ParseUser.getCurrentUser();
+                ParseObject currentPost = ParseObject.create("Post");
+                System.out.println(currentPost);
+
+                System.out.println(currentUser);
+                //ParseObject currentPost = ParseObject.getObjectId();
+                //savePost(description,currentUser,title);
+                savePost(description, currentUser, title, currentPost);
+                alertDialog.dismiss();
+            }
+        });
+    }
+
+    private void savePost(String description, ParseUser currentUser, String title, ParseObject currentPost) {
+        Comment comment = new Comment();
+        comment.setDescription(description);
+        comment.setUser(currentUser);
+        comment.setTitle(title);
+        System.out.println(title);
+
+        //ParseObject currentPost = currentUser.getParseObject("PostID");
+        comment.setPost(currentPost);
+        System.out.println(currentPost);
+        //post.setPost(currentPost);
+        comment.saveInBackground(new SaveCallback() {
+            @Override
+            public void done(ParseException e) {
+                if(e != null){
+                    Log.e(TAG, "Error while saving", e);
+                    Toast.makeText(DiscussionDetailPage.this, "Error while saving!", Toast.LENGTH_SHORT).show();
+                }
+                Log.i(TAG, "Post save was successful");
+            }
+        });
     }
 }
