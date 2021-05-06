@@ -11,11 +11,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.animehub.LoginActivity;
 import com.example.animehub.R;
+import com.example.animehub.models.Post;
 import com.parse.ParseUser;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,6 +26,8 @@ import com.parse.ParseUser;
  * create an instance of this fragment.
  */
 public class Profile extends Fragment {
+
+    private static final Object KEY_USER ="userId";
 
     public Profile() {
         // Required empty public constructor
@@ -35,13 +40,17 @@ public class Profile extends Fragment {
         return inflater.inflate(R.layout.fragment_profile, container, false);
     }
 
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        Button btnLogout = view.findViewById(R.id.btnLogout);
+        TextView tvSignout2 = view.findViewById(R.id.tvSignout2);
+        TextView tvUser = view.findViewById(R.id.tvUser);
 
-        btnLogout.setOnClickListener(new View.OnClickListener() {
+        tvUser.setText(ParseUser.getCurrentUser().getUsername());
+
+        tvSignout2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ParseUser.logOut();
