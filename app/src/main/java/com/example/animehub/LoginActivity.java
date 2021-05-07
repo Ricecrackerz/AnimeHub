@@ -45,11 +45,18 @@ public class LoginActivity extends AppCompatActivity {
         etPassword = findViewById(R.id.etPassword);
         btnLogin = findViewById(R.id.btnLogin);
         tvSignUp = findViewById(R.id.tvSignUp);
+
+        etUsername.setBackgroundColor(Color.parseColor("#c4c4c4"));
+        etPassword.setBackgroundColor(Color.parseColor("#c4c4c4"));
+        btnLogin.setBackgroundColor(Color.parseColor("#FFBB86FC"));
         String loginText = "Don't have an account? Sign Up.";
 
         SpannableString mSpannableString = new SpannableString(loginText);
         ForegroundColorSpan mBlue = new ForegroundColorSpan(Color.BLUE);
+        ForegroundColorSpan mWhite = new ForegroundColorSpan(Color.WHITE);
+        mSpannableString.setSpan(mWhite, 0, 22, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         mSpannableString.setSpan(mBlue, 23, 31, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
         mSpannableString.setSpan(new UnderlineSpan(), 23, 31, 0);
 
         ClickableSpan clickableSpan = new ClickableSpan() {

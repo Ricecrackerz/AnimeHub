@@ -27,23 +27,11 @@ public class Comment extends ParseObject {
         put(KEY_POST, currentPost);
     }
 
-    /*public ParseUser setPost(ParseUser currentPost){
-        ParseObject object = new ParseObject("Comment");
-        // do whatever you want with your object here
-        object.put("postId", KEY_POST);
-        // save object so an ID is created
-        object.saveInBackground(new SaveCallback() {
-            @Override
-            public void done(ParseException e) {
-                // Now you can do whatever you want with the object ID, like save it in a variable
-                String objectId = object.getObjectId();
-            }
-        });
+    /*public String getPost(){
+        return getString(KEY_POST); }
 
-        return getParseObject(KEY_POST);
-        put(KEY_POST, currentPost);
-
-     }*/
+    public void setPost(String currentPost) {
+        put(KEY_POST, currentPost); }*/
 
     public ParseUser getUser(){
         return getParseUser(KEY_USER);

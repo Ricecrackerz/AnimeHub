@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.example.animehub.fragments.Discussion;
 import com.example.animehub.models.Comment;
 import com.example.animehub.models.Post;
+import com.parse.FindCallback;
 import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
@@ -24,6 +25,8 @@ import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
 import java.util.List;
+
+import bolts.Task;
 
 public class DiscussionDetailPage extends AppCompatActivity {
 
@@ -64,8 +67,26 @@ public class DiscussionDetailPage extends AppCompatActivity {
             }
         });
 
+        queryPost();
 
 
+    }
+
+    private void queryPost() {
+        ParseQuery<Comment> query = ParseQuery.getQuery(Comment.class);
+        //query.include(Post.KEY_POST);
+        query.findInBackground(new FindCallback<Comment>() {
+            @Override
+            public void done(List<Comment> comment, ParseException e) {
+                if(e != null){
+                    Log.e(TAG, "Issue with getting posts", e);
+                    return;
+                }
+                for(Comment comments: comment){
+                    Log.i(TAG, "Comments: " + comments.getDescription() + "post: " + comments.getPost().getObjectId());
+                }
+            }
+        });
     }
 
     private void goDialogBox() {
@@ -104,17 +125,71 @@ public class DiscussionDetailPage extends AppCompatActivity {
                     Toast.makeText(DiscussionDetailPage.this, "Title cannot be empty", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                ParseUser currentUser = ParseUser.getCurrentUser();
-                ParseObject currentPost = ParseObject.create("Post");
-                System.out.println(currentPost);
 
-                System.out.println(currentUser);
+                ParseQuery<Comment> postQuery = ParseQuery.getQuery(Comment.class);
+
+                ParseObject currentPost = checkPost();
+
+                //ParseObject currentPost = ParseObject.getObjectId();
+                //currentPost =
+                ParseUser currentUser = ParseUser.getCurrentUser();
+                //System.out.println(currentUser);
                 //ParseObject currentPost = ParseObject.getObjectId();
                 //savePost(description,currentUser,title);
                 savePost(description, currentUser, title, currentPost);
                 alertDialog.dismiss();
             }
         });
+    }
+
+    private ParseObject checkPost() {
+
+        ParseQuery<Comment> postQuery = ParseQuery.getQuery(Comment.class);
+        postQuery.include("postID");
+        final ParseObject[] currentPost = new ParseObject[1];
+        postQuery.findInBackground(new FindCallback<Comment>() {
+            @Override
+            public void done(List<Comment> objects, ParseException e) {
+                currentPost[0] = objects.get(Integer.parseInt("postID"));
+            }
+        });
+        /*ParseQuery<ParseObject> userQuery = ParseQuery.getQuery("Comment");
+        //userQuery.include("postID");
+        //final ParseObject[] currentPost = new ParseObject[1];
+        //Task <ParseObject> currentPost = new Task<>();
+        //userQuery.find("postID");
+
+        userQuery.getInBackground("<PARSE_OBJECT_ID>", (object, e) -> {
+            currentPost[0] = (ParseObject) object.get("postID");
+            System.out.println("hi" + currentPost[0]);
+            if (e == null) {
+                //Object was successfully retrieved
+                currentPost[0] = (ParseObject) object.get("postID");
+                System.out.println("hi" + currentPost[0]);
+                //currentPost[0] = object.getParseObject("postID");
+                //System.out.println(currentPost[0]);
+            } else {
+                // something went wrong
+                System.out.println(":(");
+                Toast.makeText(DiscussionDetailPage.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        /*userQuery.findInBackground(new FindCallback<Comment>() {
+            @Override
+            public void done(List<Comment> objects, ParseException e) {
+                if (e == null) {
+                    // userObjects retrieved successfully
+                    currentPost[0] = (ParseObject) objects.get(Integer.parseInt("postID"));
+                } else {
+                    Log.d("objects", "Error: " + e.getMessage());
+                }
+            }
+        });*/
+        System.out.println(currentPost[0]);
+
+        return currentPost[0];
+
     }
 
     private void savePost(String description, ParseUser currentUser, String title, ParseObject currentPost) {

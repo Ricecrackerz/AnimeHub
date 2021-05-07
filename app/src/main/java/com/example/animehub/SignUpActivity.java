@@ -44,6 +44,8 @@ public class SignUpActivity extends AppCompatActivity {
 
         SpannableString mSpannableString = new SpannableString(loginText);
         ForegroundColorSpan mBlue = new ForegroundColorSpan(Color.BLUE);
+        ForegroundColorSpan mWhite = new ForegroundColorSpan(Color.WHITE);
+        mSpannableString.setSpan(mWhite, 0, 24, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         mSpannableString.setSpan(mBlue, 25, 32, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         mSpannableString.setSpan(new UnderlineSpan(), 25, 32, 0);
 
