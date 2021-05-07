@@ -1,6 +1,7 @@
 package adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,14 +9,18 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.animehub.AnimeDetailedPage;
 import com.example.animehub.R;
 import com.example.animehub.fragments.Home;
 import com.example.animehub.models.Anime;
+
+import org.parceler.Parcels;
 
 import java.util.List;
 
@@ -58,7 +63,7 @@ public class AnimeAdapter extends RecyclerView.Adapter<AnimeAdapter.ViewHolder> 
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-        RelativeLayout container;
+        RelativeLayout animeContainer;
         TextView animeTitle;
         TextView animeOverview;
         ImageView animePoster;
@@ -70,6 +75,7 @@ public class AnimeAdapter extends RecyclerView.Adapter<AnimeAdapter.ViewHolder> 
             animeOverview= itemView.findViewById(R.id.animeOverview);
             animePoster= itemView.findViewById(R.id.animePoster);
             animeRating = itemView.findViewById(R.id.animeRating);
+            animeContainer = itemView.findViewById(R.id.animeContainer);
         }
 
         public void bind(Anime anime) {
@@ -77,6 +83,17 @@ public class AnimeAdapter extends RecyclerView.Adapter<AnimeAdapter.ViewHolder> 
             animeOverview.setText(anime.getSynopsis());
             Glide.with(context).load(anime.getOriginalPosterPath()).into(animePoster);
             animeRating.setRating((float) anime.getAverageRating()/10);
+
+            //1. Register click listener on whole row
+            animeContainer.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //2. Navigate to a new activity on tap
+                   Intent i= new Intent(context, AnimeDetailedPage.class);
+                   i.putExtra("anime", Parcels.wrap(anime));
+                   context.startActivity(i);
+                }
+            });
         }
     }
     }

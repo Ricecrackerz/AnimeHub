@@ -3,10 +3,11 @@ package com.example.animehub.models;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.parceler.Parcel;
 
 import java.util.ArrayList;
 import java.util.List;
-
+@Parcel
 public class Anime {
 
     int animeID;
@@ -17,7 +18,7 @@ public class Anime {
     String originalPosterPath;
     String youTubeVideoId;
 
-//empty constructor for parceler
+//empty constructor needed by Parceler library
     public Anime(){}
 
     public Anime(JSONObject jsonObject) throws JSONException{

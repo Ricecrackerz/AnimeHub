@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AnimeDetailedPage"
+    android:orientation="vertical"
+    android:background="#34374A">
+
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#9E96FF"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme">
+
+        <TextView
+            android:id="@+id/toolbarTitle"
+            style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:fontFamily="@font/baloo"
+            android:gravity="center"
+            android:text="Anime List"
+            android:textColor="#FFFFFF"
+            android:textSize="30sp" />
+
+
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="70dp"
+        android:layout_height="56dp"
+        android:src="@drawable/anime_hub_logo" />
+
+
+
+    <com.google.android.youtube.player.YouTubePlayerView
+        android:id="@+id/player"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:layout_below="@+id/toolbar"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp" />
+
+    <TextView
+        android:id="@+id/animeTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/player"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="-6dp"
+        android:fontFamily="@font/alata"
+        android:textColor="#FFFFFF"
+        android:textSize="32sp"
+        tools:text="Attack on Titan" />
+
+    <RatingBar
+        android:id="@+id/animeRatingBar"
+        style="@style/Widget.AppCompat.RatingBar.Indicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/animeTitle"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="5dp"
+        android:numStars="10"
+        android:secondaryProgressTint="#00000000"
+        android:progressTint="#FFFFFF"
+        android:stepSize="0.1" />
+
+    <TextView
+        android:id="@+id/animeOverview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/animeRatingBar"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/alata"
+        android:textColor="#FFFFFF"
+        android:textSize="13dp"
+        tools:text="Centuries ago, mankind was slaughtered to near extinction by monstrous humanoid creatures called titans, forcing humans to hide in fear behind enormous concentric walls." />
+
+    <TextView
+        android:id="@+id/animeRatingScore"
+        android:layout_width="47dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/animeTitle"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="270dp"
+        android:layout_toEndOf="@+id/animeRatingBar"
+        android:fontFamily="@font/alata"
+        android:textColor="#FFFFFF"
+        android:textSize="16dp"
+        tools:text="8.55" />
+</RelativeLayout>
