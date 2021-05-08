@@ -47,8 +47,10 @@ public class Profile extends Fragment {
 
         TextView tvSignout2 = view.findViewById(R.id.tvSignout2);
         TextView tvUser = view.findViewById(R.id.tvUser);
+        TextView tvBio = view.findViewById(R.id.tvBio);
 
         tvUser.setText(ParseUser.getCurrentUser().getUsername());
+//        tvBio.setText(ParseUser.getCurrentUser().getBio());
 
         tvSignout2.setOnClickListener(new View.OnClickListener() {
             @Override
