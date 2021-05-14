@@ -5,6 +5,8 @@ import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
 
+import java.sql.Date;
+
 @ParseClassName("Post")
 public class Post extends ParseObject{
     public static final String KEY_DESCRIPTION = "description";
@@ -12,6 +14,7 @@ public class Post extends ParseObject{
     public static final String KEY_USER = "userId";
     public static final String KEY_TITLE = "title";
     public static final String KEY_CREATED_KEY = "createdAt";
+    public static final String KEY_RESPONSE = "spoiler";
 
     public String getDescription(){ return getString(KEY_DESCRIPTION); }
 
@@ -29,4 +32,10 @@ public class Post extends ParseObject{
 
     public void setTitle(String title) { put(KEY_TITLE, title); }
 
+    public String getSpoiler(){ return getString(KEY_RESPONSE); }
+
+    public void setSpoiler(String spoiler) { put(KEY_RESPONSE, spoiler); }
+
 }
+
+

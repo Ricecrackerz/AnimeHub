@@ -74,6 +74,7 @@ public class DiscussionDetailPage extends AppCompatActivity {
 
     private void queryPost() {
         ParseQuery<Comment> query = ParseQuery.getQuery(Comment.class);
+
         //query.include(Post.KEY_POST);
         query.findInBackground(new FindCallback<Comment>() {
             @Override
@@ -99,6 +100,8 @@ public class DiscussionDetailPage extends AppCompatActivity {
         layout.addView(etCommentTitle);
         etCommentTitle.setHint("Title");
 
+
+
         final EditText eCommentDescription = new EditText(this);
         layout.addView(eCommentDescription);
         eCommentDescription.setHint("Description");
@@ -117,6 +120,7 @@ public class DiscussionDetailPage extends AppCompatActivity {
             public void onClick(View v) {
                 String description = eCommentDescription.getText().toString();
                 String title = etCommentTitle.getText().toString();
+
                 if(description.isEmpty()){
                     Toast.makeText(DiscussionDetailPage.this, "Description cannot be empty", Toast.LENGTH_SHORT).show();
                     return;
@@ -129,7 +133,7 @@ public class DiscussionDetailPage extends AppCompatActivity {
                 ParseQuery<Comment> postQuery = ParseQuery.getQuery(Comment.class);
 
                 ParseObject currentPost = checkPost();
-
+                //currentPost = ParseObject.get();
                 //ParseObject currentPost = ParseObject.getObjectId();
                 //currentPost =
                 ParseUser currentUser = ParseUser.getCurrentUser();

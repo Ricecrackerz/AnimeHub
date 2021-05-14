@@ -1,39 +1,30 @@
 package com.example.animehub.fragments;
 
-import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.graphics.drawable.ColorDrawable;
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.PopupWindow;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.animehub.DiscussionDetailPage;
-import com.example.animehub.MainActivity;
 import com.example.animehub.PostsAdapter;
 import com.example.animehub.R;
 import com.example.animehub.models.Post;
+import com.example.animehub.models.User;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
@@ -52,11 +43,14 @@ public class Discussion extends Fragment {
     private EditText etDescription, etTitle;
     private PostsAdapter adapter;
     private List<Post> allPosts;
+
     private SwipeRefreshLayout swipeContainer;
+
 
     public Discussion() {
         // Required empty public constructor
     }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -151,6 +145,14 @@ public class Discussion extends Fragment {
         layout.addView(etDescription);
         etDescription.setHint("Description");
 
+        final TextView tvSpoiler = new TextView(getActivity());
+        layout.addView(tvSpoiler);
+        tvSpoiler.setText(" Do you want a spoiler tag?");
+
+        final EditText etResponse = new EditText(getActivity());
+        layout.addView(etResponse);
+        etResponse.setHint("Yes or No");
+
         final Button btnSubmit = new Button(getActivity());
         layout.addView(btnSubmit);
         btnSubmit.setText("SUBMIT");
@@ -165,6 +167,7 @@ public class Discussion extends Fragment {
             public void onClick(View v) {
                 String description = etDescription.getText().toString();
                 String title = etTitle.getText().toString();
+                String response = etResponse.getText().toString();
                 if(description.isEmpty()){
                     Toast.makeText(getContext(), "Description cannot be empty", Toast.LENGTH_SHORT).show();
                     return;
@@ -173,19 +176,37 @@ public class Discussion extends Fragment {
                     Toast.makeText(getContext(), "Description cannot be empty", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                ParseUser currentUser = ParseUser.getCurrentUser();
-                savePost(description, currentUser, title);
-                alertDialog.dismiss();
+                if(response.isEmpty()){
+                    Toast.makeText(getContext(), "Response cannot be empty", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if(response.equals("Yes")){
+                    ParseUser currentUser = ParseUser.getCurrentUser();
+                    savePost(description, currentUser, title, response);
+                    alertDialog.dismiss();
+                }
+                else if(response.equals("No")){
+                    ParseUser currentUser = ParseUser.getCurrentUser();
+                    savePost(description, currentUser, title, response);
+                    alertDialog.dismiss();
+
+                }
+                else{
+                    Toast.makeText(getContext(), "Invalid Response. Try Again.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
             }
         });
 
     }
 
-    private void savePost(String description, ParseUser currentUser, String title) {
+    private void savePost(String description, ParseUser currentUser, String title, String response) {
         Post post = new Post();
         post.setDescription(description);
         post.setTitle(title);
         post.setUser(currentUser);
+        post.setSpoiler(response);
         post.saveInBackground(new SaveCallback() {
             @Override
             public void done(ParseException e) {

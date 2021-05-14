@@ -107,6 +107,6 @@
         android:layout_toEndOf="@+id/animeRatingBar"
         android:fontFamily="@font/alata"
         android:textColor="#FFFFFF"
-        android:textSize="16dp"
+        android:textSize="14dp"
         tools:text="8.55" />
 </RelativeLayout>

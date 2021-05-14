@@ -2,6 +2,7 @@ package com.example.animehub;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.ColorSpace;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.Spanned;
@@ -46,16 +47,18 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin = findViewById(R.id.btnLogin);
         tvSignUp = findViewById(R.id.tvSignUp);
 
-        etUsername.setBackgroundColor(Color.parseColor("#c4c4c4"));
-        etPassword.setBackgroundColor(Color.parseColor("#c4c4c4"));
-        btnLogin.setBackgroundColor(Color.parseColor("#FFBB86FC"));
         String loginText = "Don't have an account? Sign Up.";
 
+        //Color mBlue = new Color(79,170,255);
+        int blue1 = Color.rgb(79,170,255);
+
         SpannableString mSpannableString = new SpannableString(loginText);
+        ForegroundColorSpan blue = new ForegroundColorSpan(blue1);
         ForegroundColorSpan mBlue = new ForegroundColorSpan(Color.BLUE);
         ForegroundColorSpan mWhite = new ForegroundColorSpan(Color.WHITE);
         mSpannableString.setSpan(mWhite, 0, 22, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         mSpannableString.setSpan(mBlue, 23, 31, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
 
         mSpannableString.setSpan(new UnderlineSpan(), 23, 31, 0);
 

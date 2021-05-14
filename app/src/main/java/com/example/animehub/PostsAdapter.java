@@ -13,11 +13,12 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.animehub.fragments.Discussion;
 import com.example.animehub.models.Post;
 
 import java.util.List;
 
-public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> {
+public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder>{
 
     private Context context;
     private List<Post> posts;
@@ -47,7 +48,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
 
     class ViewHolder extends RecyclerView.ViewHolder{
 
-        private TextView tvTitle, tvDescription, tvUsername;
+        private TextView tvTitle, tvDescription, tvUsername, tvSpoiler;
         private ImageView ivProfileImage;
         private RelativeLayout container;
 
@@ -58,6 +59,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
             tvUsername = itemView.findViewById(R.id.tvUsername);
             ivProfileImage = itemView.findViewById(R.id.ivProfileImage);
             container = itemView.findViewById(R.id.container);
+            tvSpoiler = itemView.findViewById(R.id.tvSpoiler);
 
 
         }
@@ -67,7 +69,16 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
             //tvDescription.setText(post.getDescription());
             tvTitle.setText(post.getTitle());
             tvUsername.setText(post.getUser().getUsername());
-            ivProfileImage.setImageResource(R.drawable.defaultpiccircle);
+            ivProfileImage.setImageResource(R.drawable.deafultpic);
+
+            String response = post.getSpoiler();
+
+            if(response.equals("Yes")){
+                tvSpoiler.setText("SPOILERS!!!");
+            }
+            if(response.equals("No")){
+                tvSpoiler.setText("No Spoilers :))");
+            }
 
             container.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -78,6 +89,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
                     i.putExtra("description", post.getDescription());
                     i.putExtra("username", post.getUser().getUsername());
                     i.putExtra("profilePic", R.drawable.defaultpiccircle);
+                    i.putExtra("spoilers", post.getSpoiler());
                     context.startActivity(i);
                     //((Activity) getActivity()).overridePendingTransition(0, 0);
                     //context.finish();
