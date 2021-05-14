@@ -22,7 +22,10 @@ The goal for this app is to create a place where users can easily browse through
 - **Habit:** Consistent updates on new animes
 - **Scope:** A viable project that is presentable on demo day.
 
-## Third Spring Progress Gif
+## Fourth Sprint Progress Gift
+<img src = "https://github.com/Ricecrackerz/AnimeHub/blob/master/AnimeHubGIF4.gif" width = 500>
+
+## Third Sprint Progress Gif
 <img src = "https://github.com/Ricecrackerz/AnimeHub/blob/master/AnimeHubGIF3.gif" width = 500>
 
 ## Second Sprint Progress Gif
@@ -42,18 +45,18 @@ The goal for this app is to create a place where users can easily browse through
 - [x] User can navigate through the app using bottom tab navigation
 - [x] User can see a list of anime
 - [x] User can make posts about anime
-- [ ] User can make comments on posts
-- [ ] User can select anime to add to their watchlist
-- [ ] User can see their own profile which contains thier personalized list of animes and contributions to posts
+- [ ] User can see their own profile which contains thier contributions to posts
 - [ ] ...
 
 **Optional Nice-to-have Stories**
 
+- [ ] User can select anime to add to their watchlist
 - [ ] User can sort anime by category(trending, highly rated, etc.)
 - [ ] Users can make comments on anime
-- [ ] User can watch a trailer of the anime
-- [ ] Users can have profile pictures
+- [x] User can watch a trailer of the anime
+- [x] Users can have profile pictures
 - [ ] User can see anime that they are interested in
+- [ ] User can make comments on posts
 - [ ] ...
 
 ### 2. Screen Archetypes
