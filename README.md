@@ -22,7 +22,10 @@ The goal for this app is to create a place where users can easily browse through
 - **Habit:** Consistent updates on new animes
 - **Scope:** A viable project that is presentable on demo day.
 
-## Fourth Sprint Progress Gift
+## Fifth Sprint Progress Gif
+<img src = "https://github.com/Ricecrackerz/AnimeHub/blob/master/AnimeHubGIF5.gif" width = 500>
+
+## Fourth Sprint Progress Gif
 <img src = "https://github.com/Ricecrackerz/AnimeHub/blob/master/AnimeHubGIF4.gif" width = 500>
 
 ## Third Sprint Progress Gif
