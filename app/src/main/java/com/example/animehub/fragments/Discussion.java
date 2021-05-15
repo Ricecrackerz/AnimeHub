@@ -1,7 +1,6 @@
 package com.example.animehub.fragments;
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -24,7 +23,6 @@ import android.widget.Toast;
 import com.example.animehub.PostsAdapter;
 import com.example.animehub.R;
 import com.example.animehub.models.Post;
-import com.example.animehub.models.User;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;

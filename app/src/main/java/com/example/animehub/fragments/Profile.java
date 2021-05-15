@@ -22,7 +22,6 @@ import com.example.animehub.LoginActivity;
 import com.example.animehub.PostsAdapter;
 import com.example.animehub.R;
 import com.example.animehub.models.Post;
-import com.example.animehub.models.User;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
@@ -44,17 +43,11 @@ public class Profile extends Fragment {
     private RecyclerView rvPost;
     private PostsAdapter adapter;
     private List<Post> allPosts;
-    private Context context;
-    private List<User> users;
     private SwipeRefreshLayout swipeContainer;
     private TextView tvBio;
 
     public Profile() {
         // Required empty public constructor
-    }
-    public Profile(Context context, List<User> users){
-        this.context = context;
-        this.users = users;
     }
 
     @Override
@@ -125,8 +118,8 @@ public class Profile extends Fragment {
         //rvPosts.setLayoutManager(new FrameLayoutManager(getContext()));
         rvPost.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        /*System.out.println("hi" + user.getBio());
-        tvBio.setText(user.getBio());*/
+        //System.out.println("hi" + user.getBio());
+        tvBio.setText("Anime Enthusiast!");
 
         queryPost();
 
@@ -135,8 +128,6 @@ public class Profile extends Fragment {
 
     private void queryPost() {
         ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
-        ParseQuery<User> sup = ParseQuery.getQuery(User.class);
-        sup.include(Post.KEY_USER);
         query.include(Post.KEY_USER);
         query.whereEqualTo(Post.KEY_USER, ParseUser.getCurrentUser());
         query.addDescendingOrder(Post.KEY_CREATED_KEY);
@@ -154,18 +145,6 @@ public class Profile extends Fragment {
                 allPosts.addAll(posts);
                 adapter.notifyDataSetChanged();
                 swipeContainer.setRefreshing(false);
-            }
-        });
-        sup.findInBackground(new FindCallback<User>() {
-            @Override
-            public void done(List<User> users, ParseException e) {
-                if(e != null){
-                    Log.e(TAG, "Issue with getting posts", e);
-                    return;
-                }
-                for(User user: users){
-                    Log.i(TAG, "User:" + user.getBio());
-                }
             }
         });
     }

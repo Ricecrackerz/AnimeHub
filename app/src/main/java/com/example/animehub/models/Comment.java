@@ -27,11 +27,6 @@ public class Comment extends ParseObject {
         put(KEY_POST, currentPost);
     }
 
-    /*public String getPost(){
-        return getString(KEY_POST); }
-
-    public void setPost(String currentPost) {
-        put(KEY_POST, currentPost); }*/
 
     public ParseUser getUser(){
         return getParseUser(KEY_USER);
