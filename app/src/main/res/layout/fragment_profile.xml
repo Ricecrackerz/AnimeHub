@@ -70,7 +70,7 @@
     <TextView
         android:id="@+id/tvBox"
         android:layout_width="200dp"
-        android:layout_height="200dp"
+        android:layout_height="150dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
@@ -84,10 +84,7 @@
         android:id="@+id/ivProfileImg"
         android:layout_width="92dp"
         android:layout_height="108dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="160dp"
         android:layout_marginTop="58dp"
         android:src="@drawable/deafultpic" />
 
@@ -97,23 +94,22 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="45dp"
-        android:layout_marginTop="155dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="-27dp"
+        android:layout_marginTop="194dp"
         android:fontFamily="@font/alata"
         android:text="Welcome Back,"
         android:textColor="#FFFF"
-        android:textSize="30sp" />
+        android:textSize="30sp"
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/tvUser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="155dp"
-        android:layout_marginEnd="-16dp"
-        android:layout_toEndOf="@+id/tvWelcome"
+        android:layout_below="@+id/ivProfileImg"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="-15dp"
         android:fontFamily="@font/alata"
         android:gravity="left"
         android:text="User"
@@ -143,8 +139,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="21dp"
-        android:layout_marginTop="301dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="278dp"
         android:fontFamily="@font/baloo"
         android:text="Your Posts!"
         android:textColor="#FFFF"
@@ -152,16 +148,14 @@
 
     <TextView
         android:id="@+id/tvBio"
-        android:layout_width="158dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="44dp"
-        android:layout_marginTop="208dp"
-        android:fontFamily="@font/baloo"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="200dp"
+        android:fontFamily="@font/alata"
         android:text="Bio"
-        android:textColor="#FFFF"
-        android:textSize="18sp" />
+        android:textColor="#FFFFFF"
+        android:textSize="24sp" />
 
 
 </RelativeLayout>
