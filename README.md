@@ -48,7 +48,7 @@ The goal for this app is to create a place where users can easily browse through
 - [x] User can navigate through the app using bottom tab navigation
 - [x] User can see a list of anime
 - [x] User can make posts about anime
-- [ ] User can see their own profile which contains thier contributions to posts
+- [x] User can see their own profile which contains thier contributions to posts
 - [ ] ...
 
 **Optional Nice-to-have Stories**
