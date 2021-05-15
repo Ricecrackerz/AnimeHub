@@ -13,12 +13,14 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.animehub.fragments.Discussion;
 import com.example.animehub.models.Comment;
 import com.example.animehub.models.Post;
 import com.parse.FindCallback;
 import com.parse.GetCallback;
 import com.parse.ParseException;
+import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
@@ -51,11 +53,13 @@ public class DiscussionDetailPage extends AppCompatActivity {
         String description = getIntent().getStringExtra("description");
         String username = getIntent().getStringExtra("username");
         String response = getIntent().getStringExtra("spoilers");
+        ParseFile image = getIntent().getParcelableExtra("profilePic");
 
-        if(bundle != null){
-            int profilePic = bundle.getInt("profilePic");
-            ivProfileImage.setImageResource(profilePic);
-        }
+
+
+        if(image != null) {
+            Glide.with(getBaseContext()).load(image.getUrl()).into(ivProfileImage);
+        }//if
         tvTitle.setText(title);
         tvDescription.setText(description);
         tvUsername.setText(username);
