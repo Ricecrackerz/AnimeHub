@@ -15,15 +15,19 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.animehub.LoginActivity;
 import com.example.animehub.PostsAdapter;
 import com.example.animehub.R;
 import com.example.animehub.models.Post;
+import com.example.animehub.models.User;
 import com.parse.FindCallback;
 import com.parse.ParseException;
+import com.parse.ParseFile;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
@@ -68,6 +72,7 @@ public class Profile extends Fragment {
         TextView tvSignout2 = view.findViewById(R.id.tvSignout2);
         TextView tvUser = view.findViewById(R.id.tvUser);
         TextView tvBio = view.findViewById(R.id.tvBio);
+        ImageView ivProfileImg = view.findViewById(R.id.ivProfileImg);
 
         rvPost = view.findViewById(R.id.rvPost);
         swipeContainer = view.findViewById(R.id.swipeContainer);
@@ -90,6 +95,11 @@ public class Profile extends Fragment {
 
         tvBio = view.findViewById(R.id.tvBio);
 
+        //GETTING PROFILE IMAGE FROM PARSE (idk why i did caps)
+        ParseFile image = ParseUser.getCurrentUser().getParseFile("image");
+        if(image != null){
+            Glide.with(getContext()).load(image.getUrl()).into(ivProfileImg);
+        }
 
         tvUser.setText(ParseUser.getCurrentUser().getUsername());
 //        tvBio.setText(ParseUser.getCurrentUser().getBio());
@@ -119,7 +129,7 @@ public class Profile extends Fragment {
         rvPost.setLayoutManager(new LinearLayoutManager(getContext()));
 
         //System.out.println("hi" + user.getBio());
-        tvBio.setText("Anime Enthusiast!");
+        tvBio.setText(ParseUser.getCurrentUser().getString("bio"));
 
         queryPost();
 
@@ -147,5 +157,6 @@ public class Profile extends Fragment {
                 swipeContainer.setRefreshing(false);
             }
         });
+
     }
 }

@@ -13,8 +13,11 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.animehub.fragments.Discussion;
 import com.example.animehub.models.Post;
+import com.parse.ParseFile;
+import com.parse.ParseUser;
 
 import java.util.List;
 
@@ -69,7 +72,11 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder>{
             //tvDescription.setText(post.getDescription());
             tvTitle.setText(post.getTitle());
             tvUsername.setText(post.getUser().getUsername());
-            ivProfileImage.setImageResource(R.drawable.deafultpic);
+            //GETTING PROFILE IMAGE FROM PARSE (idk why i did caps)
+            ParseFile image = post.getUser().getParseFile("image");
+            if(image != null){
+                Glide.with(context).load(image.getUrl()).into(ivProfileImage);
+            }
 
             String response = post.getSpoiler();
 
@@ -88,7 +95,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder>{
                     i.putExtra("title", post.getTitle());
                     i.putExtra("description", post.getDescription());
                     i.putExtra("username", post.getUser().getUsername());
-                    i.putExtra("profilePic", R.drawable.defaultpiccircle);
+                    i.putExtra("profilePic",  post.getUser().getParseFile("image"));
                     i.putExtra("spoilers", post.getSpoiler());
                     context.startActivity(i);
                     //((Activity) getActivity()).overridePendingTransition(0, 0);

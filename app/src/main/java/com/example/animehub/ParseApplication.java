@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.example.animehub.models.Comment;
 import com.example.animehub.models.Post;
+import com.example.animehub.models.User;
 import com.parse.Parse;
 import com.parse.ParseObject;
 
@@ -15,6 +16,7 @@ public class ParseApplication extends Application {
 
         ParseObject.registerSubclass(Post.class);
         ParseObject.registerSubclass(Comment.class);
+        ParseObject.registerSubclass(User.class);
 
         Parse.initialize(new Parse.Configuration.Builder(this)
                 .applicationId("DglS3sXbz7x4LsmO83aSa411Y1Kf8sMGkMd2f8GX")
